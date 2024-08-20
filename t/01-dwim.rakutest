@@ -1,0 +1,20 @@
+use Test;
+use LLM::DWIM;
+use LLM::Functions;
+
+plan 4;
+
+my $called = 0;
+my $arg = Nil;
+
+&llm-function.wrap: -> |args { $called++; sub ($str) { $arg = $str } }
+
+dwim "hello";
+
+ok $called, "called llm-function";
+is $arg, 'hello', 'sent args to function';
+
+dwim "world";
+
+is $called, 1, 'cached evaluator function';
+is $arg, 'world', 'sent different args';

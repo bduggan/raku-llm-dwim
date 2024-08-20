@@ -1,0 +1,25 @@
+{
+  "name" : "LLM::DWIM",
+  "authors" : [
+    "Brian Duggan"
+  ],
+  "provides" : {
+    "LLM::DWIM" : "lib/LLM/DWIM.rakumod"
+  },
+  "build-depends" : [ ],
+  "depends" : [
+    "LLM::Functions",
+    "LLM::Prompts",
+    "Log::Async",
+    "JSON::Fast",
+    "TOML"
+  ],
+  "description" : "Do What I Mean, with help from large language models",
+  "tags" : [
+    "AI", "LLM"
+  ],
+  "license" : "MIT",
+  "raku" : "6.*",
+  "version" : "0.0.1"
+}
+
