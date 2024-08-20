@@ -1,12 +1,12 @@
 NAME
 ====
 
-DWIM -- Do What I Mean, with help from large language models.
+LLM::DWIM -- Do What I Mean, with help from large language models.
 
 SYNOPSIS
 ========
 
-    use DWIM;
+    use LLM::DWIM;
 
     say dwim "How many miles is it from the earth to the moon?";
     # Approximately 238,900 miles (384,400 kilometers)
@@ -21,7 +21,7 @@ SYNOPSIS
     say distance-between("earth","sun");
     # 92955887.6 miles
 
-Meanwhile, in ~/.config/dwim.toml:
+Meanwhile, in ~/.config/llm-dwim.toml:
 
     evaluator = "gemini"
     gemini.temperature = 0.5
@@ -58,7 +58,7 @@ It is mostly equivalent to:
 
 For diagnostics, use `L<Log::Async>` and add a tap, like so:
 
-    use DWIM::Str;
+    use LLM::DWIM;
     use Log::Async;
 
     logger.send-to($*ERR);

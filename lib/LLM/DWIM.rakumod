@@ -38,13 +38,13 @@ sub dwim(Str $str) is export {
 
 =head1 NAME
 
-DWIM -- Do What I Mean, with help from large language models.
+LLM::DWIM -- Do What I Mean, with help from large language models.
 
 =head1 SYNOPSIS
 
 =begin code
 
-use DWIM;
+use LLM::DWIM;
 
 say dwim "How many miles is it from the earth to the moon?";
 # Approximately 238,900 miles (384,400 kilometers)
@@ -61,7 +61,7 @@ say distance-between("earth","sun");
 
 =end code
 
-Meanwhile, in ~/.config/dwim.toml:
+Meanwhile, in ~/.config/llm-dwim.toml:
 
 =begin code
 
@@ -109,7 +109,7 @@ For diagnostics, use C<L<Log::Async>> and add a tap, like so:
 
 =begin code
 
-use DWIM::Str;
+use LLM::DWIM;
 use Log::Async;
 
 logger.send-to($*ERR);
