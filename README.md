@@ -1,12 +1,12 @@
 NAME
 ====
 
-LLM::DWIM -- Do What I Mean, with help from large language models.
+DWIM -- Do What I Mean, with help from large language models.
 
 SYNOPSIS
 ========
 
-    use LLM::DWIM;
+    use DWIM;
 
     say dwim "How many miles is it from the earth to the moon?";
     # Approximately 238,900 miles (384,400 kilometers)
@@ -58,7 +58,7 @@ It is mostly equivalent to:
 
 For diagnostics, use `L<Log::Async>` and add a tap, like so:
 
-    use LLM::DWIM;
+    use DWIM::Str;
     use Log::Async;
 
     logger.send-to($*ERR);
@@ -68,7 +68,7 @@ For diagnostics, use `L<Log::Async>` and add a tap, like so:
 CONFIGURATION
 =============
 
-This module looks for `dwim.toml` in either `XDG_HOME` or `HOME/.config`. This can be overridden by setting `DWIM_LLM_CONF` to another filename.
+This module looks for `llm-dwim.toml` in either `XDG_HOME` or `HOME/.config`. This can be overridden by setting `DWIM_LLM_CONF` to another filename.
 
 The configuration file should be in TOML format and should contain at least one key, `evaluator`, which should be the name of the LLM evaluator to use. Evaluators can be configured using TOML syntax, with the evaluator name as the key.
 
