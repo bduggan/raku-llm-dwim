@@ -21,6 +21,7 @@
   "license" : "MIT",
   "raku" : "6.*",
   "version" : "0.0.1",
-  "auth" : ["zef:bduggan"]
+  "auth" : "zef:bduggan",
+  "source-url" : "git://github.com/bduggan/raku-llm-dwim.git"
 }
 
