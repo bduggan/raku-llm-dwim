@@ -158,7 +158,7 @@ Sample usage:
 
     llm-dwim "How many miles is it from the earth to the moon?"
     llm-dwim -v how far is it from the earth to the moon\?
-
+    echo "what is the airspeed velocity of an unladen swallow?" | llm-dwim -
 
 =head1 SEE ALSO
 

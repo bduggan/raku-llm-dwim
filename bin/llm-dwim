@@ -6,5 +6,10 @@ unit sub MAIN(*@words where @words > 0, Bool :v($verbose));
 
 logger.send-to($*ERR) if $verbose;
 
+if @words.elems == 1 && @words[0] eq '-' {
+  say dwim $*IN.slurp;
+  exit;
+}
+
 say dwim @words.join(' ');
 
