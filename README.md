@@ -76,7 +76,7 @@ The configuration file should be in TOML format and should contain at least one 
 
 Sample configurations:
 
-Use Gemini (no API key required) :
+Use Gemini (which has a free tier) :
 
     evaluator = "gemini"
 

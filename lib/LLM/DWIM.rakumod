@@ -129,7 +129,7 @@ can be configured using TOML syntax, with the evaluator name as the key.
 
 Sample configurations:
 
-Use Gemini (no API key required) :
+Use Gemini (which has a free tier) :
 
 =begin code
 
