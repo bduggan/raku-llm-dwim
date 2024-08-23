@@ -4,7 +4,8 @@
     "Brian Duggan"
   ],
   "provides" : {
-    "LLM::DWIM" : "lib/LLM/DWIM.rakumod"
+    "LLM::DWIM" : "lib/LLM/DWIM.rakumod",
+    "llm-dwim" : "script/llm-dwim"
   },
   "build-depends" : [ ],
   "depends" : [

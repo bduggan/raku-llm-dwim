@@ -1,0 +1,10 @@
+#!/usr/bin/env raku
+use LLM::DWIM;
+use Log::Async;
+
+unit sub MAIN(*@words where @words > 0, Bool :v($verbose));
+
+logger.send-to($*ERR) if $verbose;
+
+say dwim @words.join(' ');
+
