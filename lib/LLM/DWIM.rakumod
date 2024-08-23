@@ -150,6 +150,16 @@ OpenAI.max-tokens = 100
 See L<LLM::Functions|https://raku.land/zef:antononcube/LLM::Functions> for all of
 the configuration options.
 
+Also, this package includes a `llm-dwim` script that can be used
+to evaluate a string from the command line. It will look for the
+configuration file in the same way as the module.
+
+Sample usage:
+
+    llm-dwim "How many miles is it from the earth to the moon?"
+    llm-dwim -v how far is it from the earth to the moon\?
+
+
 =head1 SEE ALSO
 
 L<LLM::Functions|https://raku.land/zef:antononcube/LLM::Functions>,

@@ -1,6 +1,5 @@
 [![Actions Status](https://github.com/bduggan/raku-llm-dwim/actions/workflows/linux.yml/badge.svg)](https://github.com/bduggan/raku-llm-dwim/actions/workflows/linux.yml)
 [![Actions Status](https://github.com/bduggan/raku-llm-dwim/actions/workflows/macos.yml/badge.svg)](https://github.com/bduggan/raku-llm-dwim/actions/workflows/macos.yml)
-
 NAME
 ====
 
@@ -88,6 +87,13 @@ Use OpenAI, and modify some parameters:
     OpenAI.max-tokens = 100
 
 See [LLM::Functions](https://raku.land/zef:antononcube/LLM::Functions) for all of the configuration options.
+
+Also, this package includes a `llm-dwim` script that can be used to evaluate a string from the command line. It will look for the configuration file in the same way as the module.
+
+Sample usage:
+
+    llm-dwim "How many miles is it from the earth to the moon?"
+    llm-dwim -v how far is it from the earth to the moon\?
 
 SEE ALSO
 ========

@@ -5,7 +5,7 @@
   ],
   "provides" : {
     "LLM::DWIM" : "lib/LLM/DWIM.rakumod",
-    "llm-dwim" : "script/llm-dwim"
+    "llm-dwim" : "bin/llm-dwim"
   },
   "build-depends" : [ ],
   "depends" : [
