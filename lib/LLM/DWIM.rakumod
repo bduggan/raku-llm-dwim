@@ -105,7 +105,7 @@ evaluator($msg);
 
 =end code
 
-For diagnostics, use C<L<Log::Async>> and add a tap, like so:
+For diagnostics, use L<Log::Async|https://raku.land/cpan:BDUGGAN/Log::Async> and add a tap, like so:
 
 =begin code
 
@@ -150,12 +150,17 @@ OpenAI.max-tokens = 100
 See L<LLM::Functions|https://raku.land/zef:antononcube/LLM::Functions> for all of
 the configuration options.
 
+=head1 COMMAND LINE USAGE
+
 Also, this package includes a `llm-dwim` script that can be used
 to evaluate a string from the command line. It will look for the
-configuration file in the same way as the module.
+configuration file in the same way as the module.  It accepts
+either a string or a list of words.  The single argument "-" will
+cause it to read from standard input.
 
 Sample usage:
 
+    llm-dwim -h  # get usage
     llm-dwim "How many miles is it from the earth to the moon?"
     llm-dwim -v how far is it from the earth to the moon\?
     echo "what is the airspeed velocity of an unladen swallow?" | llm-dwim -

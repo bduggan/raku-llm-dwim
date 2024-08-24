@@ -1,5 +1,6 @@
 [![Actions Status](https://github.com/bduggan/raku-llm-dwim/actions/workflows/linux.yml/badge.svg)](https://github.com/bduggan/raku-llm-dwim/actions/workflows/linux.yml)
 [![Actions Status](https://github.com/bduggan/raku-llm-dwim/actions/workflows/macos.yml/badge.svg)](https://github.com/bduggan/raku-llm-dwim/actions/workflows/macos.yml)
+
 NAME
 ====
 
@@ -58,7 +59,7 @@ It is mostly equivalent to:
     my $msg = llm-prompt-expand($str);
     evaluator($msg);
 
-For diagnostics, use `L<Log::Async>` and add a tap, like so:
+For diagnostics, use [Log::Async](https://raku.land/cpan:BDUGGAN/Log::Async) and add a tap, like so:
 
     use LLM::DWIM;
     use Log::Async;
@@ -88,12 +89,17 @@ Use OpenAI, and modify some parameters:
 
 See [LLM::Functions](https://raku.land/zef:antononcube/LLM::Functions) for all of the configuration options.
 
-Also, this package includes a `llm-dwim` script that can be used to evaluate a string from the command line. It will look for the configuration file in the same way as the module.
+COMMAND LINE USAGE
+==================
+
+Also, this package includes a `llm-dwim` script that can be used to evaluate a string from the command line. It will look for the configuration file in the same way as the module. It accepts either a string or a list of words. The single argument "-" will cause it to read from standard input.
 
 Sample usage:
 
+    llm-dwim -h  # get usage
     llm-dwim "How many miles is it from the earth to the moon?"
     llm-dwim -v how far is it from the earth to the moon\?
+    echo "what is the airspeed velocity of an unladen swallow?" | llm-dwim -
 
 SEE ALSO
 ========

@@ -1,8 +1,13 @@
 #!/usr/bin/env raku
+
 use LLM::DWIM;
 use Log::Async;
 
-unit sub MAIN(*@words where @words > 0, Bool :v($verbose));
+unit sub MAIN(
+  *@words #= Strings to be evaluated
+      where @words > 0,
+   Bool :v($verbose)        #= Print debug information
+ );
 
 logger.send-to($*ERR) if $verbose;
 
