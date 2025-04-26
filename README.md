@@ -91,7 +91,9 @@ See [LLM::Functions](https://raku.land/zef:antononcube/LLM::Functions) for all o
 COMMAND LINE USAGE
 ==================
 
-Also, this package includes a `llm-dwim` script that can be used to evaluate a string from the command line. It will look for the configuration file in the same way as the module. It accepts either a string or a list of words. The single argument "-" will cause it to read from standard input.
+This package has two scripts:
+
+First, `llm-dwim` can be used to evaluate a string from the command line.
 
 Sample usage:
 
@@ -99,6 +101,18 @@ Sample usage:
     llm-dwim "How many miles is it from the earth to the moon?"
     llm-dwim -v how far is it from the earth to the moon\?
     echo "what is the airspeed velocity of an unladen swallow?" | llm-dwim -
+
+Second, `llm-dwim-chat` will have a chat with you.
+
+Sample session:
+
+    llm-dwim-chat you are a french tutor --name=Professor
+
+    you > Hello
+    Professor > Bonjour !  Comment allez-vous ?
+    you > Bien merci
+    Professor > Et vous ?  (And you?)
+    you >
 
 SEE ALSO
 ========

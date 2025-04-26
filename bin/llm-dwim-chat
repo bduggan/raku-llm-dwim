@@ -4,9 +4,17 @@ use Terminal::ANSI::OO;
 use LLM::DWIM;
 use Log::Async;
 
-unit sub MAIN(Str :$prompt = "", :$name = 'bot', Bool :$v);
+my %*SUB-MAIN-OPTS = :named-anywhere;
 
-logger.sent-to: $*ERR if $v;
+unit sub MAIN(
+  :$name = 'bot',    #= name to print instead of "bot"
+  Bool :$v,          #= show debug info
+  *@prompt,          #= words for initial prompt
+  );
+
+logger.send-to: $*ERR if $v;
+
+my Str $prompt = @prompt.join(' ');
 
 my $agent = dwim-chat($prompt);
 
