@@ -8,13 +8,19 @@ use TOML;
 logger.untapped-ok = True;
 
 state &evaluator;
+state $config;
 
 my $default-evaluator = 'OpenAI';
-
-sub dwim(Str $str) is export {
+sub conf-file {
   my $base = %*ENV<XDG_HOME> // $*HOME.child('.config');
-  my $conf-file = %*ENV<DWIM_LLM_CONF> // $base.child('llm-dwim.toml');
-  my $conf = do {
+  %*ENV<DWIM_LLM_CONF> // $base.child('llm-dwim.toml');
+}
+
+sub get-llm-config {
+  return $config if $config;
+
+  my $conf-file = conf-file;
+  $config = do {
     if $conf-file.IO.e {
       debug "Reading configuration from $conf-file";
       from-toml($conf-file.IO.slurp);
@@ -22,16 +28,37 @@ sub dwim(Str $str) is export {
       debug "No configuration file found at $conf-file, using default: $default-evaluator";
       %( evaluator => $default-evaluator );
     }
-  }
-  my $evaluator = $conf<evaluator> or die "No evaluator in $conf-file (found: { $conf.keys })";
+  };
+  return $config;
+}
+
+sub llm-config-thing($conf) {
+  my $evaluator = $conf<evaluator> or die "No evaluator in { conf-file } (found: { $conf.keys })";
   my $evaluator-config = $conf{ $evaluator } // {};
   debug "Configuration: $evaluator, { $evaluator-config.raku }";
+  llm-configuration( $evaluator, |%( $evaluator-config ) )
+}
+
+sub dwim(Str $str) is export {
   &evaluator //= llm-function(
-    llm-evaluator => llm-configuration( $evaluator, |%( $evaluator-config ) )
+    llm-evaluator => llm-config-thing( get-llm-config )
   );
   my $msg = llm-prompt-expand($str);
   debug "sending $msg";
   evaluator($msg);
+}
+
+sub dwim-chat($prompt = "", :$id) is export {
+  my $conf = get-llm-config();
+  my $config = llm-config-thing($conf);
+
+  my %args;
+  if $conf<evaluator> ~~ /:i gemini/  {
+    %args<llm-evaluator-class> = LLM::Functions::EvaluatorChatGemini;
+  }
+
+  my $chat = llm-chat(chat-id => $id || "dwim-chatter-" ~ ++$, conf => $config, |%args, :$prompt);
+  $chat
 }
 
 =begin pod
