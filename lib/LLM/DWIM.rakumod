@@ -48,7 +48,7 @@ sub dwim(Str $str) is export {
   evaluator($msg);
 }
 
-sub dwim-chat($prompt = "", :$id) is export {
+sub dwim-chat(Str $prompt = "", :$id) is export {
   my $conf = get-llm-config();
   my $config = llm-config-thing($conf);
 
@@ -86,6 +86,13 @@ sub distance-between($from,$to) {
 say distance-between("earth","sun");
 # 92955887.6 miles
 
+my $agent = dwim-chat("Answer every question with an exclamation point!");
+say $agent.eval: "My name is bob and I have five dogs.";
+# That's great!
+
+say $agent.eval: "How many paws is that?";
+# Twenty!
+
 =end code
 
 Meanwhile, in ~/.config/llm-dwim.toml:
@@ -108,29 +115,16 @@ a configuration file to say a little more about what you mean.
 
 =head2 dwim
 
-    sub dwim(Str $str) returns Mu
+    sub dwim(Str $str) returns Str
 
 This function takes a string, expands it using L<LLM::Prompts>, and uses L<LLM::Functions> to
 evaluate the string.
 
-It is mostly equivalent to:
+=head2 dwim-chat
 
-=begin code
+    sub dwim-chat(Str $prompt) returns Str
 
-use LLM::Functions;
-use LLM::Prompts;
-use TOML;
-
-my $conf-dir = %*ENV<XDG_HOME> // $*HOME.child('.config');
-my $conf = from-toml($conf-dir.child('llm-dwim.toml').IO.slurp);
-my $evaluator = $conf<evaluator>;
-my &evaluator //= llm-function(
-    llm-evaluator => llm-configuration( $evaluator, |%( $conf{ $evaluator } ) )
-);
-my $msg = llm-prompt-expand($str);
-evaluator($msg);
-
-=end code
+Create a chat agent that will have a conversation.
 
 For diagnostics, use L<Log::Async|https://raku.land/cpan:BDUGGAN/Log::Async> and add a tap, like so:
 
