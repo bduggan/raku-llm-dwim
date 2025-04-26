@@ -5,7 +5,8 @@
   ],
   "provides" : {
     "LLM::DWIM" : "lib/LLM/DWIM.rakumod",
-    "llm-dwim" : "bin/llm-dwim"
+    "llm-dwim" : "bin/llm-dwim",
+    "llm-dwim-chat" : "bin/llm-dwim-chat"
   },
   "build-depends" : [ ],
   "depends" : [
@@ -13,6 +14,7 @@
     "LLM::Prompts",
     "Log::Async",
     "JSON::Fast",
+    "Terminal::ANSI::OO",
     "TOML"
   ],
   "description" : "Do What I Mean, with help from large language models",
