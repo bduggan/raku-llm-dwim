@@ -2,7 +2,7 @@ use Test;
 use LLM::DWIM;
 use LLM::Functions;
 
-plan 4;
+plan 8;
 
 my $called = 0;
 my $arg = Nil;
@@ -18,3 +18,20 @@ dwim "world";
 
 is $called, 1, 'cached evaluator function';
 is $arg, 'world', 'sent different args';
+
+$called = 0;
+$arg = Nil;
+&llm-chat.wrap: -> |args {
+    $called++;
+    $arg = args<prompt>;
+}
+
+dwim-chat "hello";
+
+ok $called, "called llm-chat-function";
+is $arg, 'hello', 'sent args to chat function';
+
+dwim-chat "world";
+
+is $called, 2, 'called chat function again';
+is $arg, 'world', 'sent different args to chat function';
