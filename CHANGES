@@ -1,3 +1,6 @@
+0.0.4 2025-04-27
+      Added dwim-chat, and llm-dwim-chat CLI
+
 0.0.3 2024-08-24
       Added CLI
       Better docs
