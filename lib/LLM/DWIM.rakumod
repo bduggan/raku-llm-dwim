@@ -51,14 +51,7 @@ sub dwim(Str $str) is export {
 sub dwim-chat(Str $prompt = "", :$id) is export {
   my $conf = get-llm-config();
   my $config = llm-config-thing($conf);
-
-  my %args;
-  if $conf<evaluator> ~~ /:i gemini/  {
-    %args<llm-evaluator-class> = LLM::Functions::EvaluatorChatGemini;
-  }
-
-  my $chat = llm-chat(chat-id => $id || "dwim-chatter-" ~ ++$, conf => $config, |%args, :$prompt);
-  $chat
+  llm-chat(chat-id => $id || "dwim-chatter-" ~ ++$, conf => $config, :$prompt);
 }
 
 =begin pod

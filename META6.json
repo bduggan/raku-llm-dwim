@@ -10,7 +10,7 @@
   },
   "build-depends" : [ ],
   "depends" : [
-    "LLM::Functions",
+    "LLM::Functions:ver<0.2.2>",
     "LLM::Prompts",
     "Log::Async",
     "JSON::Fast",
