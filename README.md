@@ -24,11 +24,11 @@ SYNOPSIS
     say distance-between("earth","sun");
     # 92955887.6 miles
 
-    my $agent = dwim-chat("Answer every question with an exclamation point!");
-    say $agent.eval: "My name is bob and I have five dogs.";
+    my $bot = dwim-chat("Answer every question with an exclamation point!");
+    say $bot.eval: "My name is bob and I have five dogs.";
     # That's great!
 
-    say $agent.eval: "How many paws is that?";
+    say $bot.eval: "How many paws is that?";
     # Twenty!
 
 Meanwhile, in ~/.config/llm-dwim.toml:
@@ -56,7 +56,7 @@ dwim-chat
 
     sub dwim-chat(Str $prompt) returns Str
 
-Create a chat agent that will have a conversation.
+Create a chat bot that will have a conversation.
 
 For diagnostics, use [Log::Async](https://raku.land/cpan:BDUGGAN/Log::Async) and add a tap, like so:
 
