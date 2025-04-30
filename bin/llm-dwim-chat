@@ -2,6 +2,7 @@
 
 use Terminal::ANSI::OO;
 use LLM::DWIM;
+use Prompt;
 use Log::Async;
 
 my %*SUB-MAIN-OPTS = :named-anywhere;
@@ -12,13 +13,15 @@ unit sub MAIN(
   *@prompt,          #= words for initial prompt
   );
 
+my $p = Prompt.new;
+
 logger.send-to: $*ERR if $v;
 
 my Str $prompt = @prompt.join(' ');
 
 my $agent = dwim-chat($prompt);
 
-while (my $str = prompt t.yellow ~ "you > " ~ t.text-reset ) {
+while (my $str = $p.readline( t.yellow ~ "you > " ~ t.text-reset) ) {
   last unless $str && $str.chars;
   my $res = $agent.eval: $str;
   say t.green ~ "$name > " ~ t.text-reset ~ $res.trim;

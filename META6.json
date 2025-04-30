@@ -15,7 +15,8 @@
     "Log::Async",
     "JSON::Fast",
     "Terminal::ANSI::OO",
-    "TOML"
+    "TOML",
+    "Prompt"
   ],
   "description" : "Do What I Mean, with help from large language models",
   "tags" : [
