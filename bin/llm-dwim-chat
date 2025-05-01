@@ -3,7 +3,9 @@
 use Terminal::ANSI::OO;
 use LLM::DWIM;
 use Prompt;
+use LLM::Prompts;
 use Log::Async;
+logger.untapped-ok = True;
 
 my %*SUB-MAIN-OPTS = :named-anywhere;
 
@@ -13,18 +15,25 @@ unit sub MAIN(
   *@prompt,          #= words for initial prompt
   );
 
-my $p = Prompt.new;
+my $history = (%*ENV<XDG_HOME>.?IO // $*HOME).child('.llm-dwim-chat');
+
+my @personas = llm-prompt-dataset(:personas).grep(*<Variable> eq 'Keywords').map: *<Name>;
+my @completions = @personas.map: { "@" ~ $_ }
+my $p = Prompt.new: :editor<LineEditor>, :@completions, :$history;
 
 logger.send-to: $*ERR if $v;
+
+info "completion support? " ~ so $p.supports-completions;
+info "writing history to $history";
 
 my Str $prompt = @prompt.join(' ');
 
 my $agent = dwim-chat($prompt);
 
-while (my $str = $p.readline( t.yellow ~ "you > " ~ t.text-reset) ) {
+while (my $str = $p.readline( t.yellow ~ "you >" ~ t.text-reset ~ " ") ) {
   last unless $str && $str.chars;
   my $res = $agent.eval: $str;
   say t.green ~ "$name > " ~ t.text-reset ~ $res.trim;
+  $p.save-history;
 }
-
 
