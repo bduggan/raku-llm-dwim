@@ -1,3 +1,9 @@
+0.0.5 2025-11-21
+    history, personas
+    change wording agent -> bot
+    use Prompt for history support
+    remove workaround for gemini
+
 0.0.4 2025-04-27
       Added dwim-chat, and llm-dwim-chat CLI
 
