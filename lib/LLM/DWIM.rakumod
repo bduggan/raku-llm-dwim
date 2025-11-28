@@ -174,7 +174,7 @@ You can also add custom prompt expansions like this:
        Respond only in valid GeoJSON.
        """
 
-This will expand @geojson into the text "Respodn only in valid GeoJSON"
+This will expand @geojson into the text "Respond only in valid GeoJSON"
 
 See L<LLM::Functions|https://raku.land/zef:antononcube/LLM::Functions> for all of
 the configuration options.
