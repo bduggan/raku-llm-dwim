@@ -39,11 +39,17 @@ sub llm-config-thing($conf) {
   llm-configuration( $evaluator, |%( $evaluator-config ) )
 }
 
+sub expand($str is copy) {
+  my $e = $config<prompt><expansions> or return $str;
+  my %exp = %$e;
+  $str.subst( / '@' @( %exp.keys ) /, -> $in { %exp{ $in.substr(1) } } );
+}
+
 sub dwim(Str $str) is export {
   &evaluator //= llm-function(
     llm-evaluator => llm-config-thing( get-llm-config )
   );
-  my $msg = llm-prompt-expand($str);
+  my $msg = llm-prompt-expand(expand($str));
   debug "sending $msg";
   evaluator($msg);
 }
@@ -160,6 +166,15 @@ OpenAI.temperature = 0.9
 OpenAI.max-tokens = 100
 
 =end code
+
+You can also add custom prompt expansions like this:
+
+    [prompt.expansions]
+       geojson = """
+       Respond only in valid GeoJSON.
+       """
+
+This will expand @geojson into the text "Respodn only in valid GeoJSON"
 
 See L<LLM::Functions|https://raku.land/zef:antononcube/LLM::Functions> for all of
 the configuration options.
